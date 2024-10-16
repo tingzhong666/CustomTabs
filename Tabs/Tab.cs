@@ -14,7 +14,7 @@ namespace SolidRebar.AllRebar.SmallBoxGirderRebar.CustomContorls
     {
         public readonly Guid Id = Guid.NewGuid();
 
-        private string name;
+        private string name = default;
         public string Name
         {
             get { return name; }

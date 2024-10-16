@@ -22,6 +22,20 @@ namespace SolidRebar.AllRebar.SmallBoxGirderRebar.CustomContorls
         public static readonly DependencyProperty SelectCommandProperty =
             DependencyProperty.Register("SelectCommand", typeof(ICommand), typeof(TZItems), new PropertyMetadata(null));
 
+
+
+        public bool TZIsSelected
+        {
+            get { return (bool)GetValue(TZIsSelectedProperty); }
+            set { SetValue(TZIsSelectedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TZIsSelected.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TZIsSelectedProperty =
+            DependencyProperty.Register("TZIsSelected", typeof(bool), typeof(TZItems), new PropertyMetadata(false));
+
+
+
         public TZItems()
         {
             //MouseLeftButtonDown += TZItems_MouseLeftButtonDown;
@@ -38,18 +52,6 @@ namespace SolidRebar.AllRebar.SmallBoxGirderRebar.CustomContorls
                 SelectCommand.Execute(DataContext);
             }
         }
-
-        private void TZItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-            MessageBox.Show("TZItems_MouseLeftButtonDown");
-            if (SelectCommand != null)
-            {
-                SelectCommand.Execute(DataContext);
-            }
-
-        }
-
 
 
         protected override DependencyObject GetContainerForItemOverride()
