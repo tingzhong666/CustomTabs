@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local ="clr-namespace:SolidRebar.AllRebar.SmallBoxGirderRebar.CustomContorls" xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:Double x:Key="Item.Height">30</system:Double>
+    <Style TargetType="{x:Type local:TZItems}">
+        <Setter Property="SelectCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=local:TZTreeView,Mode=FindAncestor}, Path=SelectCommand}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ItemsSource" Value="{Binding Children}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TZItems}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel>
+                            <Border
+                                Padding="{TemplateBinding Padding}"
+                                Height="{DynamicResource Item.Height}"
+                                Background="Transparent"
+                                x:Name="Item">
+                                <Grid VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding DataContext.Name,RelativeSource={RelativeSource AncestorType=local:TZItems, Mode=FindAncestor}}"/>
+                                </Grid>
+                            </Border>
+
+                            <ItemsPresenter/>
+                        </StackPanel>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!--<Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="Items" Property="Visibility" Value="Visible"/>
+                        </Trigger>-->
+                        <DataTrigger Binding="{Binding ElementName=Item, Path=IsMouseOver}" Value="True">
+                            <Setter TargetName="Item" Property="Background" Value="#D1E3FF"/>
+                        </DataTrigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Item" Property="Background" Value="#4983e3"/>
+                            <Setter TargetName="Item" Property="TextBlock.Foreground" Value="#FFFFFF"/>
+                        </Trigger>
+                        <!--<DataTrigger Binding="{Binding Type}" Value="File">
+                            <Setter TargetName="Chevron" Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
